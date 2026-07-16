@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.6.11828.311 oobstable
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BYOMPCServer", "BYOMPCServer\BYOMPCServer.csproj", "{7223344E-2F08-6E65-5E7F-71A14DDAD3BE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7223344E-2F08-6E65-5E7F-71A14DDAD3BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7223344E-2F08-6E65-5E7F-71A14DDAD3BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7223344E-2F08-6E65-5E7F-71A14DDAD3BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7223344E-2F08-6E65-5E7F-71A14DDAD3BE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {623416EA-7DF8-4C69-863C-290BE351DD77}
+	EndGlobalSection
+EndGlobal
