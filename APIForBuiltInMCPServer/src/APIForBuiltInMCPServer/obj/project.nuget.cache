@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "zEr6A1gqQ/M=",
+  "success": true,
+  "projectFilePath": "C:\\beta1_temp1\\AppServiceMCPServers\\APIForBuiltInMCPServer\\src\\APIForBuiltInMCPServer\\APIForBuiltInMCPServer.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\gabes\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.10\\microsoft.aspnetcore.openapi.10.0.10.nupkg.sha512",
+    "C:\\Users\\gabes\\.nuget\\packages\\microsoft.openapi\\2.7.5\\microsoft.openapi.2.7.5.nupkg.sha512"
+  ],
+  "logs": []
+}
