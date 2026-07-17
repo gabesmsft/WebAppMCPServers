@@ -45,7 +45,7 @@
     },
     {
       "type": "Microsoft.Web/sites",
-      "apiVersion": "2022-09-01",
+      "apiVersion": "2025-05-01",
       "name": "[parameters('webAppName')]",
       "location": "[parameters('location')]",
       "dependsOn": [
@@ -53,6 +53,17 @@
       ],
       "properties": {
         "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('appServicePlanName'))]",
+        "aiIntegration": {
+          "Mcp": {
+            "Servers": [
+              {
+                "Name": "fruit orders",
+                "Endpoint": "/fruit-mcp-server",
+                "ApiSpecPath": "/home/site/wwwroot/.ai/spec.json"
+              }
+            ]
+          }
+        },
         "siteConfig": {
           "netFrameworkVersion": "v10.0",
           "appSettings": [
