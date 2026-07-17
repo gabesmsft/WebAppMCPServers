@@ -18,9 +18,9 @@
     },
     "webAppName": {
       "type": "string",
-      "defaultValue": "[concat('byomcp-', toLower(uniqueString(resourceGroup().name)))]",
+      "defaultValue": "byomcpwebapp",
       "metadata": {
-        "description": "Globally unique name of the Web App."
+        "description": "Web App name"
       }
     }
   },

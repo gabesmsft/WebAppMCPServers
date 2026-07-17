@@ -18,9 +18,9 @@
     },
     "webAppName": {
       "type": "string",
-      "defaultValue": "[concat('builtinmcp-', toLower(uniqueString(resourceGroup().name)))]",
+      "defaultValue": "builtinmcpwebapp",
       "metadata": {
-        "description": "Globally unique name of the Web App."
+        "description": "Web App name"
       }
     }
   },
