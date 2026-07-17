@@ -1,0 +1,76 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "APIForBuildInMCPServer | v1",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/Orders/items-by-customer/{customerName}": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "operationId": "list_items_by_customer",
+        "summary": "Get all order items for a given customer",
+        "parameters": [
+          {
+            "name": "customerName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Orders/customers-by-item/{itemName}": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "operationId": "list_customers_by_item",
+        "summary": "Get all customers who ordered a given item",
+        "parameters": [
+          {
+            "name": "itemName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Orders/customers": {
+      "get": {
+        "tags": [
+          "Orders"
+        ],
+        "operationId": "list_customers",
+        "summary": "Get all customers",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Orders"
+    }
+  ]
+}

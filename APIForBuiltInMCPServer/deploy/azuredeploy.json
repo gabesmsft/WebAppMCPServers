@@ -18,14 +18,14 @@
     },
     "webAppName": {
       "type": "string",
-      "defaultValue": "[concat('byomcp-', toLower(uniqueString(resourceGroup().name)))]",
+      "defaultValue": "[concat('builtinmcp-', toLower(uniqueString(resourceGroup().name)))]",
       "metadata": {
         "description": "Globally unique name of the Web App."
       }
     }
   },
   "variables": {
-    "packageUrl": "https://raw.githubusercontent.com/gabesmsft/WebAppMCPServers/refs/heads/master/BYOMCPServer/zip/byomcpapp.zip"
+    "packageUrl": "https://raw.githubusercontent.com/gabesmsft/WebAppMCPServers/refs/heads/master/APIForBuiltInMCPServer/zip/apiforbuiltinmcp.zip"
   },
   "resources": [
     {
