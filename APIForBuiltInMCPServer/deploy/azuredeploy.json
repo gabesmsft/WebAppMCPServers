@@ -60,7 +60,8 @@
             "Servers": [
               {
                 "Name": "fruit orders",
-                "Endpoint": "/fruit-mcp-server"
+                "Endpoint": "/fruit-mcp-server",
+                "Description": "Fruit orders"
               }
             ]
           }
