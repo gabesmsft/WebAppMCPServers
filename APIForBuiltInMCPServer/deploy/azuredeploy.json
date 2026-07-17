@@ -25,8 +25,7 @@
     }
   },
   "variables": {
-    "packageUrl": "https://raw.githubusercontent.com/gabesmsft/WebAppMCPServers/refs/heads/master/APIForBuiltInMCPServer/zip/apiforbuiltinmcp.zip",
-    "existingAppSettings": "[reference(resourceId('Microsoft.Web/sites/config', parameters('webAppName'), 'appsettings'), '2025-05-01').properties]"
+    "packageUrl": "https://raw.githubusercontent.com/gabesmsft/WebAppMCPServers/refs/heads/master/APIForBuiltInMCPServer/zip/apiforbuiltinmcp.zip"
   },
   "resources": [
     {
@@ -68,10 +67,18 @@
           }
         },
         "siteConfig": {
-          "netFrameworkVersion": "v10.0",
-          "appSettings": "[concat(createArray(createObject('name', 'CURRENT_STACK', 'value', 'dotnet'), createObject('name', 'WEBSITE_RUN_FROM_PACKAGE', 'value', variables('packageUrl'))), if(contains(variables('existingAppSettings'), 'OVERRIDE_USE_MI_FIC_ASSERTION_CLIENTID'), createArray(createObject('name', 'OVERRIDE_USE_MI_FIC_ASSERTION_CLIENTID', 'value', variables('existingAppSettings').OVERRIDE_USE_MI_FIC_ASSERTION_CLIENTID)), createArray()), if(contains(variables('existingAppSettings'), 'WEBSITE_AUTH_AAD_ALLOWED_TENANTS'), createArray(createObject('name', 'WEBSITE_AUTH_AAD_ALLOWED_TENANTS', 'value', variables('existingAppSettings').WEBSITE_AUTH_AAD_ALLOWED_TENANTS)), createArray()), if(contains(variables('existingAppSettings'), 'WEBSITE_AUTH_PRM_DEFAULT_WITH_SCOPES'), createArray(createObject('name', 'WEBSITE_AUTH_PRM_DEFAULT_WITH_SCOPES', 'value', variables('existingAppSettings').WEBSITE_AUTH_PRM_DEFAULT_WITH_SCOPES)), createArray()))]"
+          "netFrameworkVersion": "v10.0"
         }
       }
+    },
+    {
+      "type": "Microsoft.Web/sites/config",
+      "apiVersion": "2025-05-01",
+      "name": "[concat(parameters('webAppName'), '/appsettings')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites', parameters('webAppName'))]"
+      ],
+      "properties": "[union(reference(resourceId('Microsoft.Web/sites/config', parameters('webAppName'), 'appsettings'), '2025-05-01').properties, createObject('CURRENT_STACK', 'dotnet', 'WEBSITE_RUN_FROM_PACKAGE', variables('packageUrl')))]"
     }
   ],
   "outputs": {
