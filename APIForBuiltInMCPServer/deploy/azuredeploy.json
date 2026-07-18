@@ -22,10 +22,15 @@
       "metadata": {
         "description": "Web App name"
       }
+    },
+    "packageUrl": {
+      "type": "string",
+      "defaultValue": "https://raw.githubusercontent.com/gabesmsft/WebAppMCPServers/refs/heads/master/APIForBuiltInMCPServer/zip/apiforbuiltinmcp.zip",
+      "metadata": {
+        "description": "URL of the package to deploy."
+      }
     }
-  },
-  "variables": {
-    "packageUrl": "https://raw.githubusercontent.com/gabesmsft/WebAppMCPServers/refs/heads/master/APIForBuiltInMCPServer/zip/apiforbuiltinmcp.zip"
+
   },
   "resources": [
     {
@@ -65,18 +70,92 @@
               }
             ]
           }
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2022-09-01",
+      "name": "readExistingAppSettings",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites', parameters('webAppName'))]"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "expressionEvaluationOptions": {
+          "scope": "inner"
         },
-        "siteConfig": {
-          "netFrameworkVersion": "v10.0",
-          "appSettings": "[concat(createArray(createObject('name', 'CURRENT_STACK', 'value', 'dotnet'), createObject('name', 'WEBSITE_RUN_FROM_PACKAGE', 'value', variables('packageUrl'))), if(contains(reference(resourceId('Microsoft.Web/sites/config', parameters('webAppName'), 'appsettings'), '2025-05-01').properties, 'OVERRIDE_USE_MI_FIC_ASSERTION_CLIENTID'), createArray(createObject('name', 'OVERRIDE_USE_MI_FIC_ASSERTION_CLIENTID', 'value', reference(resourceId('Microsoft.Web/sites/config', parameters('webAppName'), 'appsettings'), '2025-05-01').properties.OVERRIDE_USE_MI_FIC_ASSERTION_CLIENTID)), createArray()), if(contains(reference(resourceId('Microsoft.Web/sites/config', parameters('webAppName'), 'appsettings'), '2025-05-01').properties, 'WEBSITE_AUTH_AAD_ALLOWED_TENANTS'), createArray(createObject('name', 'WEBSITE_AUTH_AAD_ALLOWED_TENANTS', 'value', reference(resourceId('Microsoft.Web/sites/config', parameters('webAppName'), 'appsettings'), '2025-05-01').properties.WEBSITE_AUTH_AAD_ALLOWED_TENANTS)), createArray()), if(contains(reference(resourceId('Microsoft.Web/sites/config', parameters('webAppName'), 'appsettings'), '2025-05-01').properties, 'WEBSITE_AUTH_PRM_DEFAULT_WITH_SCOPES'), createArray(createObject('name', 'WEBSITE_AUTH_PRM_DEFAULT_WITH_SCOPES', 'value', reference(resourceId('Microsoft.Web/sites/config', parameters('webAppName'), 'appsettings'), '2025-05-01').properties.WEBSITE_AUTH_PRM_DEFAULT_WITH_SCOPES)), createArray()))]"
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "parameters": {
+            "webAppName": {
+              "type": "string"
+            }
+          },
+          "resources": [],
+          "outputs": {
+            "existingAppSettings": {
+              "type": "object",
+              "value": "[list(resourceId('Microsoft.Web/sites/config', parameters('webAppName'), 'appsettings'), '2022-09-01').properties]"
+            }
+          }
+        },
+        "parameters": {
+          "webAppName": {
+            "value": "[parameters('webAppName')]"
+          }
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2022-09-01",
+      "name": "applyMergedAppSettings",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites', parameters('webAppName'))]",
+        "[resourceId('Microsoft.Resources/deployments', 'readExistingAppSettings')]"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "parameters": {
+            "webAppName": {
+              "type": "string"
+            },
+            "existingAppSettings": {
+              "type": "object"
+            },
+            "packageUrl": {
+              "type": "string"
+            }
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Web/sites/config",
+              "apiVersion": "2022-09-01",
+              "name": "[concat(parameters('webAppName'), '/appsettings')]",
+              "properties": "[union(parameters('existingAppSettings'), createObject('CURRENT_STACK', 'dotnet', 'WEBSITE_RUN_FROM_PACKAGE', parameters('packageUrl')))]"
+            }
+          ]
+        },
+        "parameters": {
+          "webAppName": {
+            "value": "[parameters('webAppName')]"
+          },
+          "existingAppSettings": {
+            "value": "[reference(resourceId('Microsoft.Resources/deployments', 'readExistingAppSettings'), '2022-09-01').outputs.existingAppSettings.value]"
+          },
+          "packageUrl": {
+            "value": "[parameters('packageUrl')]"
+          }
         }
       }
     }
-  ],
-  "outputs": {
-    "webAppUrl": {
-      "type": "string",
-      "value": "[concat('https://', parameters('webAppName'), '.azurewebsites.net')]"
-    }
-  }
+  ]
 }
