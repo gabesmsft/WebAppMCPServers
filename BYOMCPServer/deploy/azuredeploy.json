@@ -18,7 +18,7 @@
     },
     "webAppName": {
       "type": "string",
-      "defaultValue": byomcpwebapp",
+      "defaultValue": "byomcpwebapp",
       "metadata": {
         "description": "Web App name"
       }
