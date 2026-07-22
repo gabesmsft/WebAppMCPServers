@@ -1,0 +1,15 @@
+# Build output folders
+**/bin/
+**/obj/
+
+# Visual Studio and user-specific files
+.vs/
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Publish profiles (often environment/account specific)
+**/Properties/PublishProfiles/
+*.pubxml.user

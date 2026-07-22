@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("APIForBuiltInMCPServer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0a2381e348d2b93f545c0bad683d5a1f2b561f1d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+92cce1645aca1e4f2bcbc2d83bd2f667f9ba4b9a")]
 [assembly: System.Reflection.AssemblyProductAttribute("APIForBuiltInMCPServer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("APIForBuiltInMCPServer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
